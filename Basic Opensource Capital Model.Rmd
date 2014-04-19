@@ -1,0 +1,37 @@
+Open Source Capital Modeling Project
+========================================================
+
+This is an exploration of current open source tools available for building capital models for financial services companies.  This project started as a way to learn about best practices from the reproducible research movement in academia.  I wanted to learn how to leverage those techniques to build documentation and presentations using output from a capital model that could refresh automatically when a new model run was complete.  
+
+That idea led to an option of either creating dummy data to test these techniques.  While starting down that rabbit hole, I decided to set back and try to Frankenstein together a very basic open source capital model that can be used publicly for training and presentations.  
+
+The project is not intended to be even close to state of the art or scaleable for commercial use.
+
+ESG
+--------
+Lets start by testing various ways to load in history to calibrate models.
+
+```{r message=FALSE }
+library(quantmod)
+getSymbols("UNRATE",src="FRED") # US Unemployment rate rates from FRED
+plot(UNRATE)
+
+library(forecast)
+plot(forecast(UNEMP))
+library(FRBData)
+
+GetInterestRates("TCMNOM", lastObs = 5) # get some data, treauries constant maturities/Nominal
+
+library(Quandl)
+Treasuries = Quandl("USTREASURY/YIELD", collapse="monthly", start_date="1970-01-01", type="ts")
+plot(Treasuries[,7])
+summary(Treasuries)
+
+```
+
+Fit basic CIR model to interest rates....
+
+```{r }
+
+```
+
